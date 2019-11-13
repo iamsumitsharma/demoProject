@@ -20,8 +20,9 @@ Additional feature::
 
 added logic to charge fair based on time spent, commented out to align with output
 
-
-
 run bin/combine_file for both build and execution
+
+
+NOTE::The following repo is only for demo and will be removed once demo is done
 
 for any clarification reach out to me :: sumitsharma96@hotmail.com :: https://github.com/iamsumitsharma
