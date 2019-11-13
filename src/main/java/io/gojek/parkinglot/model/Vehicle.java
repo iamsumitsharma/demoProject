@@ -7,6 +7,8 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 import lombok.Data;;
 
@@ -15,7 +17,7 @@ public abstract class Vehicle implements Externalizable
 {
 	private String	vehicleNumber	= null;
 	private String	vehicleColor	= null;
-	
+	private LocalDateTime entryDateTime = LocalDateTime.now();
 	public Vehicle(String registrationNo, String color)
 	{
 		this.vehicleNumber = registrationNo;
@@ -28,6 +30,7 @@ public abstract class Vehicle implements Externalizable
 	{
 		out.writeObject(getVehicleNumber());
 		out.writeObject(getVehicleColor());
+		out.writeObject(getEntryDateTime());
 	}
 	
 	@Override
@@ -35,5 +38,6 @@ public abstract class Vehicle implements Externalizable
 	{
 		setVehicleNumber((String) in.readObject());
 		setVehicleColor((String) in.readObject());
+		setEntryDateTime(this.entryDateTime);
 	}
 }

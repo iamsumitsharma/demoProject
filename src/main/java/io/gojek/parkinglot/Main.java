@@ -27,9 +27,7 @@ public class Main
 		try
 		{
 			System.out.println("\n\n\n\n\n");
-			System.out.println("===================================================================");
-			System.out.println("===================      GOJEK PARKING LOT     ====================");
-			System.out.println("===================================================================");
+			System.out.println("********** PARKING LOT **********");
 			printUsage();
 			switch (args.length)
 			{

@@ -1,17 +1,17 @@
-#!/bin/sh
-arg1=$1
+# #!/bin/sh
+# arg1=$1
 
-dir=target
+# dir=target
 
-jar_name=parkinglot-1.0-SNAPSHOT.jar
+# jar_name=parkinglot-1.0-SNAPSHOT.jar
 
 mvn clean install 
 
-if [ -z "$1" ] ; then
-        java -jar $dir/$jar_name
-        exit 1
+# if [ -z "$1" ] ; then
+#         java -jar $dir/$jar_name
+#         exit 1
 
-else
-	java -jar $dir/$jar_name $arg1
+# else
+# 	java -jar $dir/$jar_name $arg1
 
-fi
+# fi

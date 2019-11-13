@@ -3,7 +3,10 @@
  */
 package io.gojek.parkinglot.parkingobjecthandlers;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -89,6 +92,9 @@ public class ParkingObjectManipulator<T extends Vehicle> implements ParkingLevel
 			return false;
 		availability.incrementAndGet();
 		parkingStrategy.add(slotNumber);
+		// Duration timeSpentPark = Duration.between(LocalDateTime.now(), vehicleSlotMapping.get(slotNumber).get().getEntryDateTime());
+		// long totalFare = Math.abs(timeSpentPark.toMinutes());
+		// System.out.println("Total fare" + 3*totalFare);
 		vehicleSlotMapping.put(slotNumber, Optional.empty());
 		return true;
 	}
@@ -102,6 +108,7 @@ public class ParkingObjectManipulator<T extends Vehicle> implements ParkingLevel
 			Optional<T> vehicle = vehicleSlotMapping.get(i);
 			if (vehicle.isPresent())
 			{
+				// vehicle.get().getEntryDateTime() can also be added along with this so as to maintain track of time spent
 				statusList.add(i + "\t\t" + vehicle.get().getVehicleNumber() + "\t\t" + vehicle.get().getVehicleColor());
 			}
 		}
