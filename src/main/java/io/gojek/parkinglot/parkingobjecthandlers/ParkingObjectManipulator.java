@@ -119,7 +119,6 @@ public class ParkingObjectManipulator<T extends Vehicle> implements ParkingLevel
 		List<String> statusList = new ArrayList<>();
 		for (int i = 1; i <= capacity.get(); i++)
 		{
-			System.out.println("i am hereee getRegNumberForColor");
 			Optional<T> vehicle = vehicleSlotMapping.get(i);
 			if (vehicle.isPresent() && color.equalsIgnoreCase(vehicle.get().getVehicleColor()))
 			{

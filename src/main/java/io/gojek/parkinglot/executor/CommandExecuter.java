@@ -25,7 +25,7 @@ public interface CommandExecuter
 		String[] inputs = inputString.split(" ");
 		String[] allCmds = new String[]{Constants.CREATE_PARKING_LOT,Constants.PARK, Constants.LEAVE, Constants.STATUS, Constants.REG_NUMBER_FOR_CARS_WITH_COLOR, Constants.SLOTS_NUMBER_FOR_CARS_WITH_COLOR, Constants.SLOTS_NUMBER_FOR_REG_NUMBER};				
 		List<String> list = Arrays.asList(allCmds);
-		System.out.println("cmd" + inputs[0] + list.contains(inputs[0]));
+		// System.out.println("cmd" + inputs[0] + list.contains(inputs[0]));
 		return list.contains(inputs[0]);
 	}
 }
