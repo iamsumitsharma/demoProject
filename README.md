@@ -16,6 +16,12 @@ file path can be given by you also.
 For Simplicity I have included it in resource so that you change and validate it over there
 
 
+Additional feature::
+
+added logic to charge fair based on time spent, commented out to align with output
+
+
+
 run bin/combine_file for both build and execution
 
 
