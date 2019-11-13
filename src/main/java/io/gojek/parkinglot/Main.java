@@ -3,11 +3,14 @@ package io.gojek.parkinglot;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-
+import java.io.IOException;
 import java.io.InputStreamReader;
 
-
-
+import io.gojek.parkinglot.exception.ErrorCode;
+import io.gojek.parkinglot.exception.ParkingException;
+import io.gojek.parkinglot.executor.CommandExecuter;
+import io.gojek.parkinglot.executor.RequestExecutor;
+import io.gojek.parkinglot.service.ParkingServiceImpl;
 
 /**
  * Hello world!
@@ -17,19 +20,22 @@ public class Main
 {
 	public static void main(String[] args)
 	{
-		
+		CommandExecuter processor = new RequestExecutor();
+		processor.setService(new ParkingServiceImpl());
 		BufferedReader bufferReader = null;
 		String input = null;
 		try
 		{
 			System.out.println("\n\n\n\n\n");
-			System.out.println("**************************** PARKING LOT DESIGN ****************************");
+			System.out.println("===================================================================");
+			System.out.println("===================      GOJEK PARKING LOT     ====================");
+			System.out.println("===================================================================");
 			printUsage();
 			switch (args.length)
 			{
-				case 0:
+				case 0: // Interactive: command-line input/output
 				{
-			
+					System.out.println("Please Enter 'exit' to end Execution");
 					System.out.println("Input:");
 					while (true)
 					{
@@ -44,11 +50,11 @@ public class Main
 							else
 							{
 								System.out.println("your input =====>>>  " + input);
-								if (input.length() > 0)
+								if (processor.validate(input))
 								{
 									try
 									{
-										System.out.println("input recieved");
+										processor.execute(input.trim());
 									}
 									catch (Exception e)
 									{
@@ -63,7 +69,7 @@ public class Main
 						}
 						catch (Exception e)
 						{
-							new Exception();
+							throw new ParkingException(ErrorCode.INVALID_REQUEST.getMessage(), e);
 						}
 					}
 					break;
@@ -78,29 +84,47 @@ public class Main
 						while ((input = bufferReader.readLine()) != null)
 						{
 							input = input.trim();
-							if (input.length() > 0)
+							if (processor.validate(input))
 							{
-								System.out.print("Input recieved for file");
+								try
+								{
+									processor.execute(input);
+								}
+								catch (Exception e)
+								{
+									System.out.println(e.getMessage());
+								}
 							}
 							else
-								System.out.println("Incorrect Command");
+								System.out.println("Incorrect Command Found at line: " + lineNo + " ,Input: " + input);
 							lineNo++;
 						}
 					}
 					catch (Exception e)
 					{
-						new Exception();
+						throw new ParkingException(ErrorCode.INVALID_FILE.getMessage(), e);
 					}
 					break;
 				}
 				default:
-					System.out.println("End here");
+					System.out.println("Invalid input. Problem might either be in your bin");
 			}
 		}
-		catch (Exception e)
+		catch (ParkingException e)
 		{
 			e.printStackTrace();
 			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			try
+			{
+				if (bufferReader != null)
+					bufferReader.close();
+			}
+			catch (IOException e)
+			{
+			}
 		}
 	}
 	
@@ -110,7 +134,7 @@ public class Main
 		buffer = buffer.append(
 				"--------------Please Enter one of the below commands. {variable} to be replaced -----------------------")
 				.append("\n");
-		buffer = buffer.append("A) For creating parking lot of size n               ---> create_parkinglot {capacity}")
+		buffer = buffer.append("A) For creating parking lot of size n               ---> create_parking_lot {capacity}")
 				.append("\n");
 		buffer = buffer
 				.append("B) To park a car                                    ---> park <<car_number>> {car_clour}")
