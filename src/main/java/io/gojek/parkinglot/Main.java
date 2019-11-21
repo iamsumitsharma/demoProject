@@ -141,10 +141,10 @@ public class Main
 				.append("\n");
 		buffer = buffer.append("D) Print status of parking slot                     ---> status").append("\n");
 		buffer = buffer.append(
-				"E) Get cars registration no for the given car color ---> registration_numbers_for_cars_with_color {car_color}")
+				"E) Get cars registration no for the given car color ---> registration_numbers_for_cars_with_colour {car_color}")
 				.append("\n");
 		buffer = buffer.append(
-				"F) Get slot numbers for the given car color         ---> slot_numbers_for_cars_with_color {car_color}")
+				"F) Get slot numbers for the given car color         ---> slot_numbers_for_cars_with_colour {car_color}")
 				.append("\n");
 		buffer = buffer.append(
 				"G) Get slot number for the given car number         ---> slot_number_for_registration_number {car_number}")
